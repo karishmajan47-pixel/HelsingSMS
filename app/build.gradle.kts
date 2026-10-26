@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.helsingsms"
-    compileSdk = 35
+    compileSdk = 34 // Reverted to 34 for stability
 
     defaultConfig {
         applicationId = "com.example.helsingsms"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
@@ -35,10 +35,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.browser:browser:1.8.0")
     
-    // UPDATED FIREBASE VERSION
-    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    // Stable Firebase version
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
 }
