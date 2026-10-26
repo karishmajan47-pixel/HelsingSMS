@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "908035131291",
+    "project_id": "helsingsms-c53f1",
+    "storage_bucket": "helsingsms-c53f1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908035131291:android:68d2cbcba115ab7acfc33e",
+        "android_client_info": {
+          "package_name": "com.example.helsingsms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUxj0WyypCzm_71TFA2mq4FmZVxFCnCuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
