@@ -19,11 +19,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # This community action automatically sets up Gradle and fixes permissions
-    - name: Build APK
-      uses: vgaidarji/android-github-actions-build@v1.0.2
+    # Official Gradle action - automatically handles the wrapper and Gradle version
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
       with:
-        build-command: 'assembleDebug'
+        gradle-version: 8.7
+
+    # Force generation of the Gradle wrapper and build
+    - name: Build Debug APK
+      run: |
+        gradle wrapper
+        gradle assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
