@@ -22,11 +22,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
 
+        // ScrollView to ensure it fits on all screen sizes
+        val scrollView = android.widget.ScrollView(this)
         val layout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(60, 100, 60, 50)
             gravity = Gravity.CENTER_HORIZONTAL
         }
+        scrollView.addView(layout)
+        setContentView(scrollView)
 
         // 1. Welcome Title
         val title = TextView(this).apply {
@@ -64,18 +68,35 @@ class MainActivity : AppCompatActivity() {
         val btnReceiver = Button(this).apply { text = "SMS RECEIVER" }
         val btnPlace = Button(this).apply { text = "SMS PLACE" }
 
-        // --- NEW PINK TEXT BOX ---
+        // --- UPDATED MULTI-LANGUAGE PINK TEXT BOX ---
         val pinkTextBox = TextView(this).apply {
-            // Using HTML to make the text bold and multi-colored
-            val styledText = "<b><font color='#D81B60'>Thank you</font> <font color='#8E24AA'>for being</font><br>" +
-                             "<font color='#3949AB'>a partner</font> <font color='#00897B'>who shares</font><br>" +
-                             "<font color='#F4511E'>our vision</font> <font color='#6D4C41'>for the</font><br>" +
-                             "<font color='#546E7A'>future.</font> <font color='#5E35B1'>We</font><br>" +
-                             "<font color='#43A047'>appreciate</font> <font color='#E53935'>your</font><br>" +
-                             "<font color='#FB8C00'>continued</font> <font color='#1E88E5'>support.</font></b>"
+            val styledText = 
+                // ENGLISH
+                "<b><font color='#D81B60'>Thank you</font> <font color='#8E24AA'>for being</font> " +
+                "<font color='#3949AB'>a partner</font> <font color='#00897B'>who shares</font> " +
+                "<font color='#F4511E'>our vision</font> <font color='#6D4C41'>for the</font> " +
+                "<font color='#546E7A'>future.</font> <font color='#5E35B1'>We</font> " +
+                "<font color='#43A047'>appreciate</font> <font color='#E53935'>your</font> " +
+                "<font color='#FB8C00'>continued</font> <font color='#1E88E5'>support.</font></b>" +
+                "<br><br>" +
+                // CHINESE (Simplified)
+                "<b><font color='#D81B60'>感谢您</font> <font color='#8E24AA'>成为</font> " +
+                "<font color='#3949AB'>与我们</font> <font color='#00897B'>拥有</font> " +
+                "<font color='#F4511E'>共同愿景</font> <font color='#6D4C41'>的</font> " +
+                "<font color='#546E7A'>合作伙伴。</font> <font color='#5E35B1'>我们</font> " +
+                "<font color='#43A047'>感谢</font> <font color='#E53935'>您</font> " +
+                "<font color='#FB8C00'>一直以来的</font> <font color='#1E88E5'>支持。</font></b>" +
+                "<br><br>" +
+                // RUSSIAN
+                "<b><font color='#D81B60'>Спасибо,</font> <font color='#8E24AA'>что вы</font> " +
+                "<font color='#3949AB'>партнер,</font> <font color='#00897B'>который разделяет</font> " +
+                "<font color='#F4511E'>наше видение</font> <font color='#6D4C41'>на</font> " +
+                "<font color='#546E7A'>будущее.</font> <font color='#5E35B1'>Мы</font> " +
+                "<font color='#43A047'>ценим</font> <font color='#E53935'>вашу</font> " +
+                "<font color='#FB8C00'>постоянную</font> <font color='#1E88E5'>поддержку.</font></b>"
             
             text = Html.fromHtml(styledText, Html.FROM_HTML_MODE_LEGACY)
-            textSize = 18f
+            textSize = 16f // Slightly smaller to fit all 3 languages
             gravity = Gravity.CENTER
             setBackgroundColor(Color.parseColor("#FCE4EC")) // Pink background
             setPadding(40, 40, 40, 40)
@@ -85,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            params.setMargins(0, 60, 0, 0)
+            params.setMargins(0, 60, 0, 60)
             layoutParams = params
         }
         // -------------------------
@@ -98,10 +119,8 @@ class MainActivity : AppCompatActivity() {
         layout.addView(btnForward)
         layout.addView(btnReceiver)
         layout.addView(btnPlace)
-        layout.addView(pinkTextBox) // Adding the new text box here
+        layout.addView(pinkTextBox) 
         
-        setContentView(layout)
-
         // Check if user is already logged in
         if (auth.currentUser != null) {
             title.text = "Welcome to HelsingSMS\n(${auth.currentUser?.email})"
