@@ -30,27 +30,15 @@ android {
     }
 }
 
-// 🔥 THIS BLOCK FORCES ANDROIDX LIBRARIES TO STABLE VERSIONS
-configurations.all {
-    resolutionStrategy {
-        force("androidx.browser:browser:1.8.0")
-        force("androidx.credentials:credentials:1.3.0")
-        force("androidx.credentials:credentials-play-services-auth:1.3.0")
-    }
-}
-
 dependencies {
+    // The AndroidX BOM fixes all AndroidX library versions automatically
+    implementation(platform("androidx.compose:compose-bom:2023.08.00")) // Just a safe baseline
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     
-    // Explicitly add these so Gradle stops complaining
-    implementation("androidx.browser:browser:1.8.0")
-    implementation("androidx.credentials:credentials:1.3.0")
-    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
-    
-    // Firebase
+    // Firebase BOM
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
