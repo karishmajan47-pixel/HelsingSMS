@@ -30,10 +30,14 @@ android {
     }
 }
 
-// This forces Gradle to use the correct version of the browser library
+// 🔥 THIS FIXES THE CRASH
 configurations.all {
     resolutionStrategy {
         force("androidx.browser:browser:1.8.0")
+        force("androidx.credentials:credentials:1.3.0")
+        force("androidx.credentials:credentials-play-services-auth:1.3.0")
+        force("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+        force("androidx.documentfile:documentfile:1.0.1")
     }
 }
 
@@ -43,7 +47,7 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     
-    // Older, stable Firebase
+    // Stable Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
