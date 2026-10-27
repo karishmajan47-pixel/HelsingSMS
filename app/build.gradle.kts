@@ -30,16 +30,21 @@ android {
     }
 }
 
+// This forces Gradle to use the correct version of the browser library
+configurations.all {
+    resolutionStrategy {
+        force("androidx.browser:browser:1.8.0")
+    }
+}
+
 dependencies {
-    // The AndroidX BOM fixes all AndroidX library versions automatically
-    implementation(platform("androidx.compose:compose-bom:2023.08.00")) // Just a safe baseline
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     
-    // Firebase BOM
-    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    // Older, stable Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
 }
