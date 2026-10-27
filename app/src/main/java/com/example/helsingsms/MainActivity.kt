@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Html
 import android.text.InputType
 import android.view.Gravity
 import android.widget.Button
@@ -23,16 +24,16 @@ class MainActivity : AppCompatActivity() {
 
         val layout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(60, 100, 60, 50) // Moved everything up a bit
+            setPadding(60, 100, 60, 50)
             gravity = Gravity.CENTER_HORIZONTAL
         }
 
-        // 1. Welcome Title (Made White and Bold)
+        // 1. Welcome Title
         val title = TextView(this).apply {
             text = "Welcome to HelsingSMS"
             textSize = 28f
             setTypeface(null, Typeface.BOLD)
-            setTextColor(Color.WHITE) // Changed to WHITE
+            setTextColor(Color.WHITE)
             gravity = Gravity.CENTER
             setPadding(0, 0, 0, 80)
         }
@@ -63,6 +64,32 @@ class MainActivity : AppCompatActivity() {
         val btnReceiver = Button(this).apply { text = "SMS RECEIVER" }
         val btnPlace = Button(this).apply { text = "SMS PLACE" }
 
+        // --- NEW PINK TEXT BOX ---
+        val pinkTextBox = TextView(this).apply {
+            // Using HTML to make the text bold and multi-colored
+            val styledText = "<b><font color='#D81B60'>Thank you</font> <font color='#8E24AA'>for being</font><br>" +
+                             "<font color='#3949AB'>a partner</font> <font color='#00897B'>who shares</font><br>" +
+                             "<font color='#F4511E'>our vision</font> <font color='#6D4C41'>for the</font><br>" +
+                             "<font color='#546E7A'>future.</font> <font color='#5E35B1'>We</font><br>" +
+                             "<font color='#43A047'>appreciate</font> <font color='#E53935'>your</font><br>" +
+                             "<font color='#FB8C00'>continued</font> <font color='#1E88E5'>support.</font></b>"
+            
+            text = Html.fromHtml(styledText, Html.FROM_HTML_MODE_LEGACY)
+            textSize = 18f
+            gravity = Gravity.CENTER
+            setBackgroundColor(Color.parseColor("#FCE4EC")) // Pink background
+            setPadding(40, 40, 40, 40)
+            
+            // Add some margin to the top
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(0, 60, 0, 0)
+            layoutParams = params
+        }
+        // -------------------------
+
         layout.addView(title)
         layout.addView(emailInput)
         layout.addView(passInput)
@@ -71,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         layout.addView(btnForward)
         layout.addView(btnReceiver)
         layout.addView(btnPlace)
+        layout.addView(pinkTextBox) // Adding the new text box here
         
         setContentView(layout)
 
